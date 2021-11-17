@@ -1,14 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Parcel Starter</title>
-  </head>
+<html>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="src/index.js"></script>
-    <div id="view"></div>
-  </body>
+<head>
+    <title>Info upload</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="./css/clownPage.css">
+
+    <script src="javascripts/index.js"></script>
+</head>
+
+<body>
+    <h1>Clownsonas</h1>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="./imgs/Clown1.svg" alt="Clown one">
+            </div>
+        </div>
+        <div class="column">
+            <div class="card"></div>
+            <img src="./imgs/Clown2.svg" alt="Clown two">
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="./imgs/Clown3.svg" alt="Clown three">
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="./imgs/Clown4.svg" alt="Clown four">
+        </div>
+    </div>
+    </div>
+
+    First Name: <input id="first_name_input" type=text />
+    <br> Last Name: <input id="last_name_input" type=text />
+    <br> Favorite Ice Cream: <input id="favorite_ice_cream_input" type=text />
+    <br>
+    <button onclick="uploadData()">Upload Data</button>
+    <div id="results"></div>
+
+    <h1>All users</h1>
+    <button onclick="loadUsers()">Load Users</button>
+    <div id="allusersdiv"></div>
+</body>
+
 </html>
