@@ -1,7 +1,7 @@
 window.addEventListener('load', event => {
     var socket = io("/queue");
     let myfunc = async function() {
-        socket.on("redirect", async (msg) => {
+        socket.on("redir", async (msg) => {
             msg = await JSON.parse(msg)
             if (msg.type == "redirect") {
                 document.getElementById("status").innerHTML="An enemy clown has been found!!"

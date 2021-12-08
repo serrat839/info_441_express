@@ -38,7 +38,7 @@ function createRouter(io, sharedsesh) {
   // active games
   let games = new Map()
 
-  _queue.on("connection", (socket) => {
+  _queue.on("connection", async (socket) => {
     // add someone to the queue
     let id_player;
     let report;
@@ -59,7 +59,6 @@ function createRouter(io, sharedsesh) {
     }
     let userData = {
       "socket": socket,
-      // TODO REPLACE THIS WITH USER AUTH
       "session_id": id_player,
       "report": report,
       "screenName": screenName
@@ -74,13 +73,13 @@ function createRouter(io, sharedsesh) {
       players.forEach(item => {
         // users are not connected to the game
         gameData.push({
-          // TODO: REPLACE WITH USER AUTH
           "user": item.session_id,
           "connected": item.report,
+          'clownsona': item.clownsona,
           "screenName":item.screenName
         })
         // send the user the redirect info
-        item.socket.broadcast.emit("redirect", JSON.stringify({
+        item.socket.broadcast.emit("redir", JSON.stringify({
           type: "redirect",
           url: "/gaming",
           // TODO: REPLACE WITH USER AUTH
@@ -99,12 +98,10 @@ function createRouter(io, sharedsesh) {
       gameid++
     }
     socket.on('disconnect', () => {
-      console.log("a user disconnected")
       queue.dequeue(userData)
-      console.log("queue.length: " + queue.length)
     })
   })
-  _ingame.on('connection', (socket) => {
+  _ingame.on('connection', async (socket) => {
     if (games.size == 0 || !socket.request._query) {
       gameDNE(socket, "This game does not exist!")
       return
@@ -119,9 +116,14 @@ function createRouter(io, sharedsesh) {
       return
     }
     // kill anyone who is trying to join and not allowed
-    // if (allowed_users.has(req.cookies["connect.sid"])) {
-    // is a TODO
-    if (true) {
+    let allowed = false;
+    for (let i = 0; i < allowed_users.length; i++) {
+      if (user == allowed_users[i].user) {
+        allowed = true
+        break
+      }
+    }
+    if (allowed) {
       gamedata.sockets.set(user, socket)
       let id_player;
       if (socket.request.session.user) {
