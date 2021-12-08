@@ -18,12 +18,14 @@ router.get('/portNUM', function(req, res, next) {
 });
 
 router.get('/playingAs', async function(req, res, next) {
+
+  let myJson;
   if(req.query.user)
   {
     req.session.user = req.query.user
     try{
       let fetchResult = await fetch("https://info-441-final.vercel.app/api/getsonanumber?uid=" + req.query.user);
-      let myJson = await fetchResult.json();
+      myJson = await fetchResult.json();
       req.session.screenName = myJson.email;
       req.session.sonanumber = myJson.sonanumber;
     }catch(error){console.log(error)}
@@ -31,6 +33,8 @@ router.get('/playingAs', async function(req, res, next) {
   res.type('json')
   if(req.query.chat){
     res.redirect("/chat");
+  } else if (req.query.metadata) {
+    res.send(JSON.stringify(myJson))
   }
   else{
     res.redirect("/");
