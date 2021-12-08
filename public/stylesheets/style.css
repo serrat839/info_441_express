@@ -1,0 +1,60 @@
+.center {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color:grey
+}
+
+h2 {
+  font-size: 40pt;
+}
+h3 {
+  text-align: center;
+}
+
+#dots {
+  font-size: 12pt;
+}
+
+img {
+  width: 100%
+}
+#game {
+  display: flex;
+  justify-content: space-between;
+}
+.container{
+  width: 30%;
+  z-index: 5;
+}
+.gameplay-image {
+  position:relative;
+  width: 100%
+}
+
+#flag {
+  width: 20%;
+  position:relative;
+  top: -41%;
+  left: 50%;
+  transform:translatex(-50%);
+  z-index: 2;
+}
+
+.gameplay-container {
+  width: 100%;
+}
+
+#sendBtn {
+  width: 50%;
+  height: 70px
+}
+
+#game {
+  max-width: 800px;
+}

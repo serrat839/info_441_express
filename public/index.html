@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script>
+      var socket = io("/queue");
+    </script>
+    <script>
+        let myfunc = async function() {
+            socket.on("redirect", async (msg) => {
+                msg = await JSON.parse(msg)
+                if (msg.type == "redirect") {
+                    document.getElementById("status").innerHTML="An enemy clown has been found!!"
+                    setTimeout(function() {
+                        window.location.href = msg.url + `?gameId=${msg.gameid}&uid=${msg.userId}`;
+                    }, 1000)
+                }
+            })
+        }
+        myfunc();
+        let numDots = 2
+        let dot = "🤡"
+        function dotter() {
+            try{
+                let container = document.getElementById("dots")
+                container.innerText = dot.repeat(numDots)
+                numDots++
+                if (numDots > 3) {
+                    numDots = 1
+                }
+            } catch (err) {
+                console.log("what?")
+            }
+        }
+        setInterval(dotter, 1000)
+    </script>
+
+</head>
+
+<body>
+    <div class="center">
+        <h1>Tug of War Queue</h1>
+        <h2 id="status">Waiting for more clowns<span id="dots">🤡</span></h2>
+    </div>
+</body>
+
+</html>

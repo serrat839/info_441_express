@@ -1,0 +1,76 @@
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString)
+        var socket = io("/ingame", {query: `gameId=${urlParams.get("gameId")}&uid=${urlParams.get("uid")}`});
+        function sendMsg(){
+            socket.emit("move", '')
+        }
+        function positionFlag(score) {
+            let flag = document.getElementById("flag")
+            let position = 50
+            let step = position / 20
+            step = score * step
+            position = position + step
+            flag.style.left = `${position}%`
+        }
+        socket.on("roles", async (msg) => {
+            msg = await JSON.parse(msg)
+            console.log(msg)
+            document.getElementById("player-a").innerText = msg.minus ? `You: ${msg.left}` : msg.left
+            document.getElementById("player-b").innerText = !msg.minus ? `You: ${msg.right}` : msg.right
+            positionFlag(msg.score)
+        })
+        socket.on("gameover",  async (msg) => {
+            msg = await JSON.parse(msg)
+            try {
+                document.getElementById("output").innerHTML = msg.winner
+            } catch (err) {
+                console.log(err)
+            }
+        })
+        socket.on("play",  async (msg) => {
+            msg = await JSON.parse(msg)
+            try {
+                positionFlag(msg.value)
+            } catch (err) {
+                console.log(err)
+            }
+        })
+        socket.on("fatal", async (msg) => {
+            // maybe switch some flags around? idk.
+            document.getElementById("center").innerHTML = msg
+        })
+    </script>
+
+</head>
+<body>
+    <div class="center" id="center">
+        <h1>Tug of War!</h1>
+        <div id="game">
+            <!-- player a -->
+            <div id="player-a-container" class="container">
+                <h3 id="player-a"></h3>
+                <!-- TODO: replace this with a fetch request that gets the users clownsona if available.. otherwise use some default -->
+                <img src="http://localhost:3000/clownsonas/clown1.svg">
+            </div>
+            <!-- image stuff -->
+            <div class="gameplay-container">
+                <img src="img/rope.jpg" class="gameplay-image">
+                <img src="img/flag.png" id="flag" class="gameplay-image">
+                
+                <button id="sendBtn" onclick="sendMsg()">PULL!!</button>
+            </div>
+            <div id="player-b-container" class="container">
+                <h3 id="player-b"></h3>
+                <!-- TODO: replace this with a fetch request that gets the users clownsona if available.. otherwise use some default -->
+                <img src="http://localhost:3000/clownsonas/clown1.svg">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
