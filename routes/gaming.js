@@ -105,7 +105,7 @@ function createRouter(io, sharedsesh) {
     })
   })
   _ingame.on('connection', (socket) => {
-    if (games.size == 0) {
+    if (games.size == 0 || !socket.request._query) {
       gameDNE(socket, "This game does not exist!")
       return
     }

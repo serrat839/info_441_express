@@ -22,36 +22,44 @@ function createRouter(io, sharedsesh) {
   const users = new Set();
   // past x messages chached???
   let logs = new ChatHistory(20)
-  _chat.on("connection", (socket) => {
+  _chat.on("connection", async (socket) => {
     // todo: update this to work with firebase
     let user;
+    let clownsona;
     if(socket.request.session.screenName)
     {
       user = socket.request.session.screenName;
+      clownsona = await fetch(`/playingAs?user=${user_id}&metadata=true`)
+        .then(result => result.json())
     }
     else{
-      user = socket.request.session.id;
+      // user = socket.request.session.id;
+      user = `Guest ${users.size}`
     }
-    
-    users.add(user)
+    let usertoken = {user: user, clownsona: clownsona}
+    users.add(usertoken)
     // join chatroom
     socket.join("chat")
     // to everyone update userlist
     socket.in("chat").emit("users", Array.from(users))
-    console.log("sending to user...")
     socket.emit("joining", Array.from(users), logs.getLog())
 
     // chat messages
     socket.on("chat message", (msg) => {
-      socket.to('chat').emit("cr", msg, (socket.request.session.screenName ? socket.request.session.screenName : socket.request.session.id))
-      socket.emit("cr2", msg, (socket.request.session.screenName ? socket.request.session.screenName : socket.request.session.id))
-      logs.add({user: (socket.request.session.screenName ? socket.request.session.screenName : socket.request.session.id), "msg": msg})
+      let payload = {
+        "msg": msg,
+        // socket.request.session.screenName ? socket.request.session.screenName : socket.request.session.id
+        "user": user
+      }
+      socket.to('chat').emit("cr", payload)
+      socket.emit("cr2", payload)
+      logs.add(payload)
     })
     // in the room actively
     socket.on("disconnect", () => {
       // resend the user list
       console.log("bye")
-      users.delete(user)
+      users.delete(usertoken)
     })
   })
     return router

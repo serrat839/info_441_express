@@ -74,6 +74,7 @@
 <body>
     <div class="center" id="center">
         <h1>Tug of War!</h1>
+        <h2 id="output"></h2>
         <div id="game">
             <!-- player a -->
             <div id="player-a-container" class="container">
@@ -85,8 +86,7 @@
             <div class="gameplay-container">
                 <img src="img/rope.jpg" class="gameplay-image">
                 <img src="img/flag.png" id="flag" class="gameplay-image">
-                
-                <button id="sendBtn" onclick="sendMsg()">PULL!!</button>
+                <button id="sendBtn" class="mashable" onclick="sendMsg()">PULL!!</button>
             </div>
             <div id="player-b-container" class="container">
                 <h3 id="player-b"></h3>
@@ -94,6 +94,9 @@
                 <img alt="Player B clownsona" id="player-b-img">
             </div>
         </div>
+    </div>
+    <div class="center ingame">
+        <a href="https://info-441-final.vercel.app"><p>Home 🤡</p></a>
     </div>
 
 </body>

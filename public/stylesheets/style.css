@@ -6,10 +6,6 @@
   align-items: center;
 }
 
-h1 {
-  color:grey
-}
-
 h2 {
   font-size: 40pt;
 }
@@ -24,6 +20,11 @@ h3 {
 img {
   width: 100%
 }
+
+img.usersidebar {
+  width:10%
+}
+
 #game {
   display: flex;
   justify-content: space-between;
@@ -50,11 +51,101 @@ img {
   width: 100%;
 }
 
-#sendBtn {
+.mashable {
   width: 50%;
   height: 70px
 }
 
 #game {
   max-width: 800px;
+}
+.other {
+  max-width: 900px;
+}
+.users-chat {
+  display:flex;
+  justify-content: space-evenly;
+  height: 70vh
+}
+#sendmsg {
+  display:flex;
+  justify-content: space-evenly;
+}
+#textInput {
+  width:70%;
+  flex-grow:2;
+}
+
+#chatarea{
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  width: 60%
+}
+
+#chatResults {
+  overflow-y:scroll;
+  border-bottom: solid 2px rgb(166,158,162, .3);
+}
+header.space {
+  text-align: center;
+}
+
+header.space h1 {
+  font-family: "Coda Caption", sans-serif;
+  text-transform: uppercase;
+  font-size: 80px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  text-shadow: #551755 20px 14px 20px;
+  text-size-adjust: auto;
+}
+header.space p {
+  margin-top: 0px;
+  font-size: 22px;
+}
+
+body.chatmainpage{
+  background-image: url("../img/background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Share Tech Mono', monospace;
+  color: #E0DBD7;
+}
+.users-chat{
+  background-color: rgb(166,158,162, .3);
+  width: 100%
+}
+
+body.chatmainpage h2 {
+  font-size: 20px;
+  text-align: center;
+}
+.userarea {
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  height: 100%;
+}
+.userarea>a>p {
+  text-align: center;
+}
+
+.userarea > div {
+  height: 80%;
+  overflow-y:scroll;
+}
+a:visited {
+  color: #E0DBD7
+}
+.activeusers{
+  display: flex;
+  justify-content: center;
+}
+.activeusers img {
+  border-radius: 50%
+}
+
+.center > a:visited {
+  color:brown;
 }
