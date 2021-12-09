@@ -1,4 +1,4 @@
-const clownsonaUrl = 'https://clowntown.me/clownsonas/clown'
+const clownsonaUrl = 'https://www.clowntown.me.me/clownsonas/clown'
 window.addEventListener('load', (event) => {
     let automove = true;
     let chat = document.getElementById("chatResults")

@@ -24,7 +24,7 @@ router.get('/playingAs', async function(req, res, next) {
   {
     req.session.user = req.query.user
     try{
-      let fetchResult = await fetch("https://clowntown.me/api/getsonanumber?uid=" + req.query.user);
+      let fetchResult = await fetch("https://www.clowntown.me.me/api/getsonanumber?uid=" + req.query.user);
       myJson = await fetchResult.json();
       req.session.screenName = myJson.email;
       req.session.user = req.query.user
