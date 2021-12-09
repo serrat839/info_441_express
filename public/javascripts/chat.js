@@ -1,4 +1,4 @@
-const clownsonaUrl = 'https://info-441-final.vercel.app/clownsonas/clown'
+const clownsonaUrl = 'https://clowntown.me/clownsonas/clown'
 window.addEventListener('load', (event) => {
     let automove = true;
     let chat = document.getElementById("chatResults")

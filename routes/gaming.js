@@ -203,7 +203,7 @@ function createRouter(io, sharedsesh) {
           playersScreen[currentPlayer.user] = currentPlayer.screenName
         })
         if (playersReport[winner]) {
-          fetch("https://info-441-final.vercel.app/api/registerWin?uid=" + winner)
+          fetch("https://clowntown.me/api/registerWin?uid=" + winner)
             .catch(function (error) {
               console.log(error);
             })
