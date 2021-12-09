@@ -1,7 +1,7 @@
 window.addEventListener('load', event => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString)
-    const clownsonaUrl = "https://www.clowntown.me.me/clownsonas/clown"
+    const clownsonaUrl = "https://www.clowntown.me/clownsonas/clown"
     var socket = io("/ingame", {query: `gameId=${urlParams.get("gameId")}&uid=${urlParams.get("uid")}`});
     function buildClownsonaUrl(clown) {
         return clownsonaUrl + clown + ".svg"
