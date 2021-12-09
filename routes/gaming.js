@@ -43,6 +43,7 @@ function createRouter(io, sharedsesh) {
     let id_player;
     let report;
     let screenName;
+    let clownsona;
     if (socket.request.session.user) {
       id_player = socket.request.session.user;
       report = true;
@@ -50,6 +51,11 @@ function createRouter(io, sharedsesh) {
     else {
       id_player = socket.request.session.id;
       report = false;
+    }
+    if (socket.request.session.sonanumber) {
+      clownsona = socket.request.session.sonanumber
+    } else {
+      clownsona = "guest"
     }
     if (socket.request.session.screenName) {
       screenName = socket.request.session.screenName;
@@ -61,7 +67,8 @@ function createRouter(io, sharedsesh) {
       "socket": socket,
       "session_id": id_player,
       "report": report,
-      "screenName": screenName
+      "screenName": screenName,
+      "clownsona": clownsona
     };
     queue.enqueue(userData)
     // if two or more people are connected, pop them from the dict and send them to a game
@@ -154,9 +161,11 @@ function createRouter(io, sharedsesh) {
         if (isPlus) {
           gameInfo["right"] = gamedata.players[i].screenName
           gameInfo["rightuid"] = gamedata.players[i].user
+          gameInfo["rightclownsona"] = gamedata.players[i].clownsona
         } else {
           gameInfo["left"] = gamedata.players[i].screenName
           gameInfo["leftuid"] = gamedata.players[i].user
+          gameInfo["leftclownsona"] = gamedata.players[i].clownsona
         }
       }
       for (let i = 0; i < 2; i++) {
