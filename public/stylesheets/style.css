@@ -22,7 +22,8 @@ img {
 }
 
 img.usersidebar {
-  width:10%
+  width:20%;
+  background-color: white;
 }
 
 #game {

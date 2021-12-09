@@ -29,8 +29,7 @@ function createRouter(io, sharedsesh) {
     if(socket.request.session.screenName)
     {
       user = socket.request.session.screenName;
-      clownsona = await fetch(`/playingAs?user=${user_id}&metadata=true`)
-        .then(result => result.json())
+      clownsona = socket.request.session.sonanumber;
     }
     else{
       // user = socket.request.session.id;

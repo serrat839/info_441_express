@@ -3,10 +3,11 @@ window.addEventListener('load', event => {
     let myfunc = async function() {
         socket.on("redir", async (msg) => {
             msg = await JSON.parse(msg)
+            console.log(msg)
             if (msg.type == "redirect") {
                 document.getElementById("status").innerHTML="An enemy clown has been found!!"
                 setTimeout(function() {
-                    window.location.href = msg.url + `?gameId=${msg.gameid}&uid=${msg.userId}`;
+                    window.location.href = msg.url + `?gameId=${msg.gameid}&uid=${msg.user}`;
                 }, 1000)
             }
         })

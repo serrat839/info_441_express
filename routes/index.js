@@ -27,7 +27,8 @@ router.get('/playingAs', async function(req, res, next) {
       let fetchResult = await fetch("https://info-441-final.vercel.app/api/getsonanumber?uid=" + req.query.user);
       myJson = await fetchResult.json();
       req.session.screenName = myJson.email;
-      req.session.sonanumber = myJson.sonanumber;
+      req.session.user = req.query.user
+      req.session.sonanumber = myJson.number;
     }catch(error){console.log(error)}
   }
   res.type('json')

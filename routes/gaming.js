@@ -72,20 +72,18 @@ function createRouter(io, sharedsesh) {
       let gameData = []
       players.forEach(item => {
         // users are not connected to the game
-        gameData.push({
+        let userGameData = {
+          type: "redirect",
+          url: "/gaming",
           "user": item.session_id,
           "connected": item.report,
           'clownsona': item.clownsona,
-          "screenName":item.screenName
-        })
-        // send the user the redirect info
-        item.socket.broadcast.emit("redir", JSON.stringify({
-          type: "redirect",
-          url: "/gaming",
-          // TODO: REPLACE WITH USER AUTH
-          userId: item.session_id,
+          "screenName":item.screenName,
           gameid: gameid
-        }))
+        }
+        gameData.push(userGameData)
+        // send the user the redirect info
+        item.socket.emit("redir", JSON.stringify(userGameData))
       })
       // store game data and increment game id
       games.set(gameid.toString(), {

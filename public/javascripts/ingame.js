@@ -36,13 +36,13 @@ window.addEventListener('load', event => {
         msg = await JSON.parse(msg)
         console.log(msg)
         // now fetch everyone's clownsona...
-        let left_clownsona = await fetchClownsona(msg.leftuid)
-        let right_clownsona = await fetchClownsona(msg.rightuid)
-        console.log(left_clownsona)
+        // let left_clownsona = await fetchClownsona(msg.leftuid)
+        // let right_clownsona = await fetchClownsona(msg.rightuid)
+        // console.log(left_clownsona)
         document.getElementById("player-a").innerText = msg.minus ? `You: ${msg.left}` : msg.left
         document.getElementById("player-b").innerText = !msg.minus ? `You: ${msg.right}` : msg.right
-        document.getElementById("player-a-img").src = buildClownsonaUrl(left_clownsona)
-        document.getElementById("player-b-img").src = buildClownsonaUrl(right_clownsona)
+        // document.getElementById("player-a-img").src = buildClownsonaUrl(left_clownsona)
+        // document.getElementById("player-b-img").src = buildClownsonaUrl(right_clownsona)
         positionFlag(msg.score)
     })
     socket.on("gameover",  async (msg) => {
