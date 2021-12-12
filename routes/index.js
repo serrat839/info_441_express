@@ -48,10 +48,5 @@ router.get('/getRanked', function(req, res, next) {
   res.send(JSON.stringify({user: req.session.user, screenName: req.session.screenName}));
 });
 
-// todo: use mongo to store this stuff.
-router.get('/api/registerWin', function(req, res, next) {
-  res.type('json')
-  res.send(JSON.stringify({user: req.query.uid}));
-});
 
 export default router;

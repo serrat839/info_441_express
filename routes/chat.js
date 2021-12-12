@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-// import enableWS from 'express-ws'
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -20,10 +19,8 @@ function createRouter(io, sharedsesh) {
   });
 
   const users = new Set();
-  // past x messages chached???
   let logs = new ChatHistory(20)
   _chat.on("connection", async (socket) => {
-    // todo: update this to work with firebase
     let user;
     let clownsona;
     if(socket.request.session.screenName)
@@ -32,7 +29,6 @@ function createRouter(io, sharedsesh) {
       clownsona = socket.request.session.sonanumber;
     }
     else{
-      // user = socket.request.session.id;
       user = `Guest ${users.size}`
     }
     let usertoken = {user: user, clownsona: clownsona}
@@ -47,7 +43,6 @@ function createRouter(io, sharedsesh) {
     socket.on("chat message", (msg) => {
       let payload = {
         "msg": msg,
-        // socket.request.session.screenName ? socket.request.session.screenName : socket.request.session.id
         "user": user
       }
       socket.to('chat').emit("cr", payload)

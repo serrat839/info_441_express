@@ -23,9 +23,6 @@ function createRouter(io, sharedsesh) {
   })
   /* GET home page. */
   router.get('/', function (req, res, next) {
-    // check that they're a valid player in the game...
-    // use auth tokens for this
-    //console.log(req.query)
     res.sendFile(path.join(__dirname, '/../public/ingame.html'));
   });
 

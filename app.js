@@ -6,7 +6,6 @@ import session from 'express-session';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
-// import gamingRouter from './routes/gaming.js';
 
 
 import { fileURLToPath } from 'url';
@@ -23,18 +22,5 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// const oneDay = 1000 * 60 * 60 * 24
-// app.use(session({
-//   secret: "Thisisashitsecretlmfaoasdf;lkasdf;",
-//   saveUninitialized: true,
-//   cookie: {maxAge: oneDay},
-//   resave: false
 
-// }))
-/*
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log('Example app listening at http://localhost:PORT')
-})
-*/
 export default app;

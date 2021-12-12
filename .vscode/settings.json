@@ -1,4 +1,8 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/dd72089e-54c6-4ea9-8bb4-37a246cee6b2/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/clowntowngames",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
 }
